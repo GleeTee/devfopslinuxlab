@@ -34,9 +34,10 @@ resource "cloudflare_page_rule" "force_www" {
   zone = "${var.cloudflare_domain}"
   target = "https://${var.cloudflare_domain}/*"
   priority = 1
-
-  actions {
-      forwarding_url = "https://www.${var.cloudflare_domain}/$1"
-      status_code = "301"
+  actions = {
+    forwarding_url {
+      url = "https://www.${var.cloudflare_domain}/$1"
+      status_code = "301",
+    }
   }
-}
+ }
